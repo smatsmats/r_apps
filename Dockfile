@@ -1,0 +1,7 @@
+FROM r-base
+WORKDIR /r_work/
+USER we_r
+RUN curl https://raw.githubusercontent.com/smatsmats/r_public/main/covid19_work.R  > covid19_work.R
+COPY covid_work.R .
+WORKDIR /usr/local/src/myscripts
+CMD ["Rscript", "covid19_work.R"]
