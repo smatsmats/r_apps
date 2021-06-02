@@ -7,14 +7,19 @@ RUN apt-get update -y && \
     apt-get dist-upgrade -y && \
     apt-get clean all && \
     apt-get install --no-install-recommends -y \
-    apt-utils
-RUN apt-get install --no-install-recommends -y \
+    apt-utils && \
+    apt-get install --no-install-recommends -y \
     git \
-    curl
+    curl \
+    libssl-dev \
+    libcurl4-openssl-dev \
+    libxml2-dev
+
 USER we_r
 RUN git clone https://github.com/smatsmats/r_public.git
-RUN ls -lR
+
 USER root
 RUN R -f r_public/covid19_install_packages.R
+
 USER we_r
 CMD ["Rscript", "r_public/covid19_work.R"]
